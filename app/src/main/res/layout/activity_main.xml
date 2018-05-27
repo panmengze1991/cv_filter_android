@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:drawableTop="@drawable/ic_logo1"
+            android:drawablePadding="-10dp"
+            android:text="@string/cv_filter"
+            android:gravity="center_horizontal"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/text_title"/>
+
+    <Button
+            android:id="@+id/btn_filter"
+            style="@style/ThemeButton"
+            android:layout_marginBottom="50dp"
+            android:text="@string/start_filter"/>
+</LinearLayout>
