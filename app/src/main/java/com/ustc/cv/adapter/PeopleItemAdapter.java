@@ -25,12 +25,10 @@ public class PeopleItemAdapter extends BaseRecyclerAdapter<Person> {
 
     public PeopleItemAdapter(List<Person> dataList, Context mContext, int layoutId) {
         super(dataList, mContext, layoutId);
-        Log.d("panmengze", "PeopleItemAdapter listSize = " + dataList.size());
     }
 
     @Override
     protected void bindData(BaseViewHolder holder, final int position) {
-        Log.d("panmengze", "bindData");
         final Person person = dataList.get(position);
 
         ImageView ivPeople = (ImageView) holder.getView(R.id.iv_person);
@@ -45,9 +43,9 @@ public class PeopleItemAdapter extends BaseRecyclerAdapter<Person> {
         Glide.with(mContext).load(R.drawable.ic_logo).into(ivPeople);
         tvPeopleName.setText(person.getName());
         tvGraduateFrom.setText(person.getGraduateFrom());
-        tvGender.setText(person.getGender());
+        tvGender.setText(person.getGender()==1?"男":"女");
         tvAge.setText(String.valueOf(person.getAge())+ "岁");
-        tvDuration.setText(person.getDuration());
+        tvDuration.setText(String.valueOf(person.getDuration())+"年");
         btnInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

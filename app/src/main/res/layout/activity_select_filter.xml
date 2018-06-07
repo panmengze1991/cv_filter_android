@@ -1,72 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:layout_height="match_parent">
 
     <LinearLayout
-            style="@style/LinearItem">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
 
-        <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout
+                style="@style/LinearItem">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/filter_age"/>
+
+            <EditText
+                    android:id="@+id/et_age_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="起始"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:textSize="@dimen/text_middle_14"
+                    android:maxLength="1"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="~"
+                    android:textSize="@dimen/text_middle_14"/>
+
+            <EditText
+                    android:id="@+id/et_age_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="结束"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:textSize="@dimen/text_middle_14"
+                    android:maxLength="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                style="@style/LinearItem">
+
+            <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/filter_leave_rate"/>
+
+            <Spinner
+                    android:id="@+id/sp_leave_rate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                style="@style/LinearItem">
+
+            <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/filter_job_type"/>
+
+            <Spinner
+                    android:id="@+id/sp_job_type"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                style="@style/LinearItem">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/filter_duration"/>
+
+            <TextView
+                    android:id="@+id/btn_select_duration"
+                    android:background="@drawable/theme_button_bg_green_selector"
+                    android:text="选择"
+                    android:textColor="@color/default_white"
+                    android:padding="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <CheckBox
+                android:id="@+id/cb_public"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/filter_qualify"/>
+                android:layout_marginLeft="20dp"
+                android:text="@string/filter_public"/>
 
-        <Spinner
-                android:id="@+id/sp_qualify_1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:layout_height="wrap_content"/>
+        <RadioGroup
+                android:id="@+id/rg_gender"
+                style="@style/LinearItem">
 
-    </LinearLayout>
+            <RadioButton
+                    android:id="@+id/rb_gender_default"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/filter_gender_default"/>
 
-    <LinearLayout
-            style="@style/LinearItem">
+            <RadioButton
+                    android:id="@+id/rb_gender_male"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/filter_gender_male"/>
 
-        <TextView
-                android:layout_width="wrap_content"
+            <RadioButton
+                    android:id="@+id/rb_gender_female"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/filter_gender_female"/>
+
+        </RadioGroup>
+
+        <EditText
+                android:id="@+id/et_description"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/filter_exp"/>
+                android:hint="@string/filter_description_hint"/>
 
-        <Spinner
-                android:id="@+id/sp_exp_2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:layout_height="wrap_content"/>
-
+        <Button
+                android:id="@+id/btn_go"
+                style="@style/ThemeButton"
+                android:layout_marginBottom="50dp"
+                android:text="@string/filter_go"/>
     </LinearLayout>
-
-    <LinearLayout
-            style="@style/LinearItem">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/filter_job_type"/>
-
-        <Spinner
-                android:id="@+id/sp_job_type_3"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <Button
-            android:id="@+id/btn_go"
-            style="@style/ThemeButton"
-            android:layout_marginBottom="50dp"
-            android:text="@string/filter_go"/>
-</LinearLayout>
+</ScrollView>

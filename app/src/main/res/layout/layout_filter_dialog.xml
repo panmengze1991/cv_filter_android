@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请设置工作年限"
+            android:padding="10dp"
+            android:textSize="@dimen/text_large_16"/>
+
+    <View
+            style="@style/Divider"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="博士"
+                android:padding="10dp"
+                android:textSize="@dimen/text_large_16"/>
+
+        <EditText
+                android:id="@+id/et_doctor_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="起始"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                android:textSize="@dimen/text_middle_14"/>
+
+        <EditText
+                android:id="@+id/et_doctor_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="结束"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="硕士"
+                android:padding="10dp"
+                android:textSize="@dimen/text_large_16"/>
+
+        <EditText
+                android:id="@+id/et_master_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="起始"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                android:textSize="@dimen/text_middle_14"/>
+
+        <EditText
+                android:id="@+id/et_master_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="结束"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本科"
+                android:padding="10dp"
+                android:textSize="@dimen/text_large_16"/>
+
+        <EditText
+                android:id="@+id/et_bachelor_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="起始"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                android:textSize="@dimen/text_middle_14"/>
+
+        <EditText
+                android:id="@+id/et_bachelor_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="结束"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他"
+                android:padding="10dp"
+                android:textSize="@dimen/text_large_16"/>
+
+        <EditText
+                android:id="@+id/et_normal_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="起始"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                android:textSize="@dimen/text_middle_14"/>
+
+        <EditText
+                android:id="@+id/et_normal_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="结束"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_middle_14"
+                android:maxLength="1"/>
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textColor="@color/text_gray"
+            android:text="*有一项留空即表示对该学历不做限制"/>
+
+    <TextView
+            android:id="@+id/btn_finish"
+            android:text="完成"
+            style="@style/ThemeButton"/>
+</LinearLayout>

@@ -14,10 +14,10 @@ public class Person implements Parcelable {
     private String name;
     private Integer avatar;
     private Integer age;
-    private String gender;
+    private Integer gender;
     private String graduateFrom;
-    private String duration;
-    private String duty;
+    private Integer duration;
+    private String career;
     private String skill;
     private String description;
     private String jobExp;
@@ -47,11 +47,11 @@ public class Person implements Parcelable {
         this.age = age;
     }
 
-    public String getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -63,20 +63,20 @@ public class Person implements Parcelable {
         this.graduateFrom = graduateFrom;
     }
 
-    public String getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
-    public String getDuty() {
-        return duty;
+    public String getCareer() {
+        return career;
     }
 
-    public void setDuty(String duty) {
-        this.duty = duty;
+    public void setCareer(String career) {
+        this.career = career;
     }
 
     public String getSkill() {
@@ -122,10 +122,10 @@ public class Person implements Parcelable {
         dest.writeString(this.name);
         dest.writeValue(this.avatar);
         dest.writeValue(this.age);
-        dest.writeString(this.gender);
+        dest.writeValue(this.gender);
         dest.writeString(this.graduateFrom);
-        dest.writeString(this.duration);
-        dest.writeString(this.duty);
+        dest.writeValue(this.duration);
+        dest.writeString(this.career);
         dest.writeString(this.skill);
         dest.writeString(this.description);
         dest.writeString(this.jobExp);
@@ -139,10 +139,10 @@ public class Person implements Parcelable {
         this.name = in.readString();
         this.avatar = (Integer) in.readValue(Integer.class.getClassLoader());
         this.age = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.gender = in.readString();
+        this.gender = (Integer) in.readValue(Integer.class.getClassLoader());
         this.graduateFrom = in.readString();
-        this.duration = in.readString();
-        this.duty = in.readString();
+        this.duration = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.career = in.readString();
         this.skill = in.readString();
         this.description = in.readString();
         this.jobExp = in.readString();
