@@ -2,7 +2,7 @@ package com.ustc.cv.model.http;
 
 import com.ustc.cv.model.Person;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Author        Daniel
@@ -11,14 +11,13 @@ import java.util.List;
  * Description:  提交过滤选项返回的名单结果
  */
 public class ResultPostProperties extends ResultBase{
-    private List<Person> data;
+    private ArrayList<Person> data;
 
-    @Override
-    public List<Person> getData() {
+    public ArrayList<Person> getData() {
         return data;
     }
 
-    public void setData(List<Person> data) {
+    public void setData(ArrayList<Person> data) {
         this.data = data;
     }
 }

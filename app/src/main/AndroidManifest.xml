@@ -3,6 +3,8 @@
           package="com.ustc.cv">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
             android:allowBackup="true"
@@ -18,11 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SelectFilterActivity">
+        <activity android:name=".SelectFilterActivity"
+                  android:label="@string/label_filter">
         </activity>
-        <activity android:name=".PeopleListActivity">
+        <activity android:name=".PeopleListActivity"
+                  android:label="@string/label_person_list">
         </activity>
-        <activity android:name=".PeopleDetailActivity">
+        <activity android:name=".PeopleDetailActivity"
+                  android:label="@string/label_person_detail">
         </activity>
     </application>
 

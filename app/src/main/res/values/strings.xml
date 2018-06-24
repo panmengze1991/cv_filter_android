@@ -3,6 +3,11 @@
     <string name="cv_filter">人工智能简历筛选</string>
     <string name="start_filter">开始匹配</string>
 
+    <!-- label -->
+    <string name="label_filter">选择过滤条件</string>
+    <string name="label_person_list">筛选结果</string>
+    <string name="label_person_detail">个人资料</string>
+
     <!-- 配置过滤器 -->
     <string name="filter_age">年龄限制</string>
     <string name="filter_exp">工作年限</string>
@@ -20,8 +25,15 @@
     <string name="filter_leave_rate_1">半年一次</string>
     <string name="filter_leave_rate_2">一年一次</string>
     <string name="filter_leave_rate_3">两年一次</string>
+    <string name="progress_hint">正在匹配，大约需要30秒&#8230;</string>
+    <string name="toast_filter_success">筛选成功</string>
+    <string name="toast_filter_failed">服务器开小差啦，请再试一次~</string>
 
-
+    <!-- 通用 -->
+    <string name="dialog_loading">载入中&#8230;</string>
+    <string name="btn_confirm">确认</string>
+    <string name="btn_cancel">取消</string>
+    <string name="toast_invite">已发出邀约</string>
 
     <!-- 列表界面 -->
     <string name="details">详情</string>

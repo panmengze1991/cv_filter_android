@@ -3,10 +3,21 @@ package com.ustc.cv;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.ustc.cv.model.http.ResultBase;
+import com.ustc.cv.model.http.ResultGetProperties;
+import com.ustc.cv.utils.http.ConnInterface;
+import com.ustc.cv.utils.http.ConnectionFactory;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.IOException;
+
+public class MainActivity extends BaseActivity {
 
 //
 //    @BindView(R.id.btn_filter)
@@ -23,19 +34,5 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btn_filter)
     public void onViewClicked() {
         startActivity(new Intent(this,SelectFilterActivity.class));
-//        ConnInterface connection = ConnectionFactory.getConnection();
-//        Call<ResultBase> call = connection.getProperties();
-//
-//        call.enqueue(new Callback<ResultBase>() {
-//            @Override
-//            public void onResponse(Call<ResultBase> call, Response<ResultBase> response) {
-//                Log.d("panmengze response", response.body().getMsg());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResultBase> call, Throwable t) {
-//
-//            }
-//        });
     }
 }

@@ -22,12 +22,15 @@ import com.ustc.cv.utils.Const;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PeopleListActivity extends AppCompatActivity {
+public class PeopleListActivity extends BaseActivity {
 
 
     Context mContext;
     @BindView(R.id.rv_people_list)
     RecyclerView rvPeopleList;
+
+    int[][] avatars = {{R.drawable.avatar1, R.drawable.avatar2, R.drawable.avatar3, R.drawable.avatar4},
+            {R.drawable.avatar5, R.drawable.avatar6, R.drawable.avatar7, R.drawable.avatar8}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,26 +46,25 @@ public class PeopleListActivity extends AppCompatActivity {
      * @author: Daniel
      */
     protected void initRecyclerView() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,
+                false);
         // 设置布局管理器
         rvPeopleList.setLayoutManager(layoutManager);
 
         // 设置adapter
-        final List<Person> personList = new ArrayList<>();
-        Person person = new Person();
-        person.setAvatar(R.drawable.ic_logo);
-        person.setName("李俊锋");
-        person.setAge(22);
-        person.setGender(1);
-        person.setGraduateFrom("中国科学技术大学");
-        person.setDuration(1);
-        person.setCareer("软件工程师");
-        person.setSkill("JAVA C++ Python ");
-        person.setDescription("非常牛逼");
-        person.setJobExp("一家企业");
-        person.setProjectExp("非常多的项目");
-        personList.add(person);
-        personList.add(person);
+//        final List<Person> personList = new ArrayList<>();
+//        Person person = new Person();
+//        person.setAvatar(R.drawable.ic_logo);
+//        person.setName("李俊锋");
+//        person.setAge(22);
+//        person.setGender(1);
+//        person.setGraduateFrom("中国科学技术大学");
+//        person.setDuration(1);
+//        person.setCareer("软件工程师");
+//        person.setSkill("JAVA C++ Python ");
+//        person.setDescription("非常牛逼");
+//        person.setJobExp("一家企业");
+//        person.setProjectExp("非常多的项目");
 //        personList.add(person);
 //        personList.add(person);
 //        personList.add(person);
@@ -70,20 +72,33 @@ public class PeopleListActivity extends AppCompatActivity {
 //        personList.add(person);
 //        personList.add(person);
 //        personList.add(person);
-        PeopleItemAdapter peopleItemAdapter=   new PeopleItemAdapter(personList,mContext,R.layout.recycler_item_people);
+//        personList.add(person);
+//        personList.add(person);
+
+
+        final ArrayList<Person> personList = getIntent().getExtras().getParcelableArrayList(Const.BundleKey
+                .PERSON_LIST);
+        for (Person person : personList) {
+            int i = (int) ((Math.random() * 100) % 4);
+            int gender = person.getGender();
+            person.setAvatar(avatars[gender][i]);
+        }
+        PeopleItemAdapter peopleItemAdapter = new PeopleItemAdapter(personList, mContext, R.layout
+                .recycler_item_people);
         peopleItemAdapter.setOnItemBtnClickListener(new OnItemBtnClickListener<Person>() {
             @Override
             public void onClick(Person person, int position) {
-                Toast.makeText(mContext,"已发出邀约！",Toast.LENGTH_SHORT).show();
+                showToast(R.string.toast_invite);
             }
         });
         peopleItemAdapter.setOnItemClickListener(new OnItemClickListener<Person>() {
             @Override
             public void onClick(Person person, int position) {
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(Const.BundleKey.PERSON_LIST, (ArrayList<? extends Parcelable>) personList);
+                bundle.putParcelableArrayList(Const.BundleKey.PERSON_LIST, (ArrayList<? extends Parcelable>)
+                        personList);
                 Intent intent = new Intent(mContext, PeopleDetailActivity.class);
-                intent.putExtra(Const.IntentKey.PERSON_POSITION,position);
+                intent.putExtra(Const.IntentKey.PERSON_POSITION, position);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

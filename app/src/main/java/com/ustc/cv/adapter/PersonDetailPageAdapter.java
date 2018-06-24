@@ -77,9 +77,9 @@ public class PersonDetailPageAdapter extends PagerAdapter {
 
         tvPersonName.setText(person.getName());
         tvGraduateFrom.setText(person.getGraduateFrom());
-        tvGender.setText(person.getGender());
+        tvGender.setText(person.getGender() == 1?"男":"女");
         tvAge.setText(String.valueOf(person.getAge())+"岁");
-        tvDuration.setText(person.getDuration());
+        tvDuration.setText(person.getDuration()+"年");
         tvDescription.setText(person.getDescription());
         tvSkill.setText(person.getSkill());
         tvJobExp.setText(person.getJobExp());

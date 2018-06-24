@@ -1,7 +1,7 @@
 package com.ustc.cv.model.http;
 
-import com.ustc.cv.model.FilterOptions;
-import com.ustc.cv.model.Person;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -12,16 +12,15 @@ import java.util.List;
  * Description:  请求基类
  */
 public class ResultBase {
-    private Integer result;
+    private Integer code;
     private String msg;
-    private Object data;
 
-    public Integer getResult() {
-        return result;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setResult(Integer result) {
-        this.result = result;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -32,11 +31,4 @@ public class ResultBase {
         this.msg = msg;
     }
 
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 }

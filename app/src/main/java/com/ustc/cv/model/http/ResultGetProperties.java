@@ -1,6 +1,6 @@
 package com.ustc.cv.model.http;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Author        Daniel
@@ -9,14 +9,13 @@ import java.util.List;
  * Description:  获取职位信息
  */
 public class ResultGetProperties extends ResultBase{
-    private List<String> data;
+    private ArrayList<String> data;
 
-    @Override
-    public List<String> getData() {
+    public ArrayList<String> getData() {
         return data;
     }
 
-    public void setData(List<String> data) {
+    public void setData(ArrayList<String> data) {
         this.data = data;
     }
 }

@@ -40,7 +40,7 @@ public class PeopleItemAdapter extends BaseRecyclerAdapter<Person> {
         TextView btnInvite = (TextView) holder.getView(R.id.btn_invite);
         LinearLayout llPeopleItem = (LinearLayout) holder.getView(R.id.ll_people_item);
 
-        Glide.with(mContext).load(R.drawable.ic_logo).into(ivPeople);
+        Glide.with(mContext).load(person.getAvatar()).into(ivPeople);
         tvPeopleName.setText(person.getName());
         tvGraduateFrom.setText(person.getGraduateFrom());
         tvGender.setText(person.getGender()==1?"男":"女");

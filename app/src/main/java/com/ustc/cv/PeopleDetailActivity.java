@@ -14,7 +14,7 @@ import com.ustc.cv.utils.Const;
 
 import java.util.List;
 
-public class PeopleDetailActivity extends AppCompatActivity {
+public class PeopleDetailActivity extends BaseActivity {
 
     @BindView(R.id.vp_people_detail)
     ViewPager vpPeopleDetail;
@@ -49,5 +49,6 @@ public class PeopleDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_invite)
     public void onViewClicked() {
+        showToast(R.string.toast_invite);
     }
 }

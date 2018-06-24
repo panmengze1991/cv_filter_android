@@ -3,18 +3,27 @@ package com.ustc.cv;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.google.gson.Gson;
 import com.ustc.cv.callback.OnDialogSubmitListener;
 import com.ustc.cv.model.FilterOptions;
+import com.ustc.cv.model.http.ResultGetProperties;
+import com.ustc.cv.model.http.ResultPostProperties;
 import com.ustc.cv.utils.CommonUtils;
 import com.ustc.cv.utils.Const;
+import com.ustc.cv.utils.http.ConnInterface;
+import com.ustc.cv.utils.http.ConnectionFactory;
+import com.ustc.cv.utils.http.RetrofitClient;
 import com.ustc.cv.view.FilterDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +32,15 @@ import static com.ustc.cv.utils.Const.LeaveRate.ONCE_PER_TWO_YEAR;
 import static com.ustc.cv.utils.Const.LeaveRate.ONCE_PER_YEAR;
 import static com.ustc.cv.utils.Const.LeaveRate.TWICE_PER_YEAR;
 
-public class SelectFilterActivity extends AppCompatActivity implements OnDialogSubmitListener<String[][]> {
+public class SelectFilterActivity extends BaseActivity implements OnDialogSubmitListener<String[][]> {
 
     Context mContext;
 
+    List<String> jobTypeList;
 
     FilterOptions filterOptions = new FilterOptions();
-    String[][] duration = new String[][]{{"doctor", "-1", "-1"}, {"master", "-1", "-1"}, {"bachelor", "-1", "-1"},
-            {"normal", "-1", "-1"}};
+    String[][] duration = new String[][]{{"doctor", "0", "99"}, {"master", "0", "99"}, {"bachelor", "0", "99"},
+            {"normal", "0", "99"}};
 
     @BindView(R.id.et_age_start)
     EditText etAgeStart;
@@ -64,42 +74,72 @@ public class SelectFilterActivity extends AppCompatActivity implements OnDialogS
         mContext = this;
         ButterKnife.bind(this);
 
+
+
+        initData();
         initView();
     }
 
-    private void initView() {
-        List<String> list = new ArrayList<>();
-        list.add("JAVA");
-        list.add("Web前端");
-        list.add("机械");
+    /**
+     * author:      Daniel
+     * description: 获取职位
+     */
+    private void initData() {
+        showProgress();
+        ConnInterface connection = ConnectionFactory.getConnection(RetrofitClient.getRetrofit());
+        Call<ResultGetProperties> call = connection.getProperties();
 
-        List<String> list1 = new ArrayList<>();
-        list1.add("一年两次");
-        list1.add("两年一次");
-        list1.add("一年一次");
-        spLeaveRate.setAdapter(new ArrayAdapter<>(mContext, R.layout.spinner_list__item, list1));
-        spJobType.setAdapter(new ArrayAdapter<>(mContext, R.layout.spinner_list__item, list));
+        call.enqueue(new Callback<ResultGetProperties>() {
+            @Override
+            public void onResponse(Call<ResultGetProperties> call, Response<ResultGetProperties> response) {
+                dismissProgress();
+                ResultGetProperties resultGetProperties = response.body();
+                Log.d("panmengze", "resultGetProperties.size() == "+resultGetProperties.getData().size());
+                jobTypeList = resultGetProperties.getData();
+                spJobType.setAdapter(new ArrayAdapter<>(mContext, R.layout.spinner_list__item, jobTypeList));
+            }
+
+            @Override
+            public void onFailure(Call<ResultGetProperties> call, Throwable t) {
+                dismissProgress();
+                t.printStackTrace();
+                jobTypeList =new ArrayList<>();
+                jobTypeList.add("Java");
+                jobTypeList.add("FrontEnd");
+                jobTypeList.add("Mechanical");
+                spJobType.setAdapter(new ArrayAdapter<>(mContext, R.layout.spinner_list__item, jobTypeList));
+            }
+        });
+    }
+
+    private void initView() {
+        List<String> listLeaveRate = new ArrayList<>();
+        listLeaveRate.add("一年两次");
+        listLeaveRate.add("两年一次");
+        listLeaveRate.add("一年一次");
+        spLeaveRate.setAdapter(new ArrayAdapter<>(mContext, R.layout.spinner_list__item, listLeaveRate));
     }
 
     @OnClick(R.id.btn_go)
     public void onViewClicked() {
-        int gender = -1;
+        showProgress(R.string.progress_hint);
+        Integer gender = null;
         double leaveRate = -1;
 
-        switch (rgGender.getCheckedRadioButtonId()){
+        switch (rgGender.getCheckedRadioButtonId()) {
             case R.id.rb_gender_male:
-                gender=1;
+                gender = 1;
                 break;
             case R.id.rb_gender_female:
-                gender=0;
+                gender = 0;
                 break;
             case R.id.rb_gender_default:
-                gender=-1;
+                gender = null;
                 break;
         }
 
 
-        switch (spLeaveRate.getSelectedItem().toString()){
+        switch (spLeaveRate.getSelectedItem().toString()) {
             case TWICE_PER_YEAR:
                 leaveRate = 2.0;
                 break;
@@ -112,19 +152,43 @@ public class SelectFilterActivity extends AppCompatActivity implements OnDialogS
         }
 
         filterOptions.setGender(gender);
-        filterOptions.setAgeBottom(Integer.valueOf(CommonUtils.getText(etAgeStart)));
-        filterOptions.setAgeTop(Integer.valueOf(CommonUtils.getText(etAgeEnd)));
-        filterOptions.setDuration(duration);
+        filterOptions.setAgeBottom(CommonUtils.getNumber(etAgeStart));
+        filterOptions.setAgeTop(CommonUtils.getNumber(etAgeEnd));
+//        filterOptions.setDuration(duration);
         filterOptions.setLeaveRate(leaveRate);
-        filterOptions.setIsPublic(cbPublic.isChecked()?"是":"否");
+        filterOptions.setIsPublic(cbPublic.isChecked() ? "是" : "否");
         filterOptions.setCareer(spJobType.getSelectedItem().toString());
         filterOptions.setDescription(CommonUtils.getText(etDescription));
 
         // TODO: 2018/6/7  请求接口
+        ConnInterface connection = ConnectionFactory.getConnection(RetrofitClient.getRetrofit());
+        Call<ResultPostProperties> call = connection.postProperties(filterOptions);
+        call.enqueue(new Callback<ResultPostProperties>() {
+            @Override
+            public void onResponse(Call<ResultPostProperties> call, Response<ResultPostProperties> response) {
+                dismissProgress();
+                if (response.code()==200){
+                    Bundle bundle = new Bundle();
+                    ArrayList<? extends  Parcelable> personList = response.body().getData();
+                    bundle.putParcelableArrayList(Const.BundleKey.PERSON_LIST, personList);
+                    Intent intent = new Intent(mContext,PeopleListActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    showToast(R.string.toast_filter_success);
+                } else {
+                    showToast(R.string.toast_filter_failed);
+                }
+            }
 
-        Log.d("panmengze",new Gson().toJson(filterOptions));
+            @Override
+            public void onFailure(Call<ResultPostProperties> call, Throwable t) {
+                dismissProgress();
+                showToast(R.string.toast_filter_failed);
+                t.printStackTrace();
+            }
+        });
 
-        startActivity(new Intent(mContext, PeopleListActivity.class));
+//        startActivity(new Intent(mContext, PeopleListActivity.class));
     }
 
     @OnClick(R.id.btn_select_duration)
